@@ -49,7 +49,7 @@ const Dynamo = {
         const res = await documentClient.put(params).promise();
 
         if(!res){
-            throw Error('Error al insrtar la data');
+            throw Error('Error al insertar la data');
         }
 
         return data;

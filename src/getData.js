@@ -58,26 +58,26 @@ module.exports.getStarwarsApi = async function(event, context, callback) {
 module.exports.getDynamoApi = async function(event, context, callback) {
 
 	if (event.pathParameters == null) {
-		const all_peoples = await Dynamo.getAll('starships').catch(err => {
+		const all_starships = await Dynamo.getAll('starships').catch(err => {
 			console.log('error in Dynamo Get', err);
 			return "LA URL NO PUDO SER PROCESADA";
 		});
 
 		const data = {
 			statusCode: 200,
-			body: JSON.stringify(all_peoples)
+			body: JSON.stringify(all_starships)
 		};
 		return callback(null, data)
 	} else {
 		let Id = event.pathParameters.Id;
-		const user = await Dynamo.get(Id, 'starships').catch(err => {
+		const starships = await Dynamo.get(Id, 'starships').catch(err => {
 			console.log('error in Dynamo Get', err);
 			return "LA URL NO PUDO SER PROCESADA";
 		});
 
 		const data = {
 			statusCode: 200,
-			body: JSON.stringify(user)
+			body: JSON.stringify(starships)
 		};
 
 		return callback(null, data)
